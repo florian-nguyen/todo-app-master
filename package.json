@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "back-end server serving front-end for Todo List challenge by devchallenges.io",
   "main": "server.js",
+  "engines": {
+    "node": "15.14.0",
+    "npm": "7.7.6"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:ui": "rm -rf build && cd ./client && npm run build --prod && cp -r build ../"
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Florian NGUYEN",
   "license": "ISC",
