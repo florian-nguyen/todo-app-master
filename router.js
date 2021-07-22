@@ -3,10 +3,7 @@ const router = express.Router();
 
 const db = require("./db/database");
 
-// Server homepage
-router.get('/', (req, res) => {
-    res.send("Homepage endpoint!");
-});
+const path = require("path");
 
 // Get all todos
 router.get('/api/v1/todo', async (req, res) => {
@@ -49,13 +46,8 @@ router.get('/api/v1/todo/delete/:id', async (req, res) => {
     }
 });
 
-// Other routes
-// router.get("*", (req, res) => {
-//     res.send("404 ERROR NOT FOUND");
-// });
-
-router.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+router.get('(/*)?', async (req, res, next) => {
+    res.sendFile(path.join(path.normalize(path.join(__dirname, './client/build')), 'index.html'));
 });
 
 module.exports = router;

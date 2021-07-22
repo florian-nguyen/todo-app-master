@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-// const baseURL = "/api/v1/todo";
-const baseURL = `http://localhost:${process.env.PORT || 8080}/api/v1/todo`;
-// console.log("Axios Base URL : " + baseURL);
+const devURL = `http://localhost:8080/api/v1/todo`;
+
+const proURL = `https://fng-dc-todo-list.herokuapp.com/api/v1/todo`;
+
+const baseURL = process.env.NODE_ENV === "production" ? proURL : devURL;
 
 export default axios.create({
     baseURL,
