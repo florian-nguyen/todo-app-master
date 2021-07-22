@@ -50,4 +50,8 @@ router.get('(/*)?', async (req, res, next) => {
     res.sendFile(path.join(path.normalize(path.join(__dirname, './client/build')), 'index.html'));
 });
 
+router.get("*", (req, res) => {
+    res.status(404).send("Error: NOT FOUND");
+});
+
 module.exports = router;

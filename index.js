@@ -5,15 +5,17 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+const morgan = require("morgan");
+
 if (process.env.NODE_ENV === "production") {
     const path = require("path");
     const serveStatic = require('serve-static');
     app.use(serveStatic(__dirname + '/client/build'));
+    app.use(morgan('tiny'));
 
     // app.use(express.static(path.join(__dirname, '../client/build')));
     // app.use(express.static(path.resolve(__dirname, "./client/build")));
 } else {
-    const morgan = require("morgan");
     app.use(morgan("dev"));
 }
 

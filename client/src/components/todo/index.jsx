@@ -226,12 +226,10 @@ export default function Todo() {
 		e.preventDefault();
 
 		try {
-			console.log("clicked");
 			const response = await axios.post("/add", {
 				name: newTodo,
 			});
 
-			console.log(response.data);
 			setTodos([...todos, response.data]);
 			setNewTodo("");
 		} catch (error) {

@@ -1,5 +1,5 @@
 {
-  "name": "Florian NGUYEN devchallenges.io Todo List Challenge",
+  "name": "devchallenge-todo-list",
   "version": "1.0.0",
   "description": "back-end server serving front-end for Todo List challenge by devchallenges.io",
   "main": "server.js",
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "dev": "clear && node-dev index.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Florian NGUYEN",
