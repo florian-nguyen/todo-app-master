@@ -9,7 +9,8 @@ require("dotenv").config();
 //     port: process.env.PG_PORT,
 // };
 const devConfig = {
-    connectionString: process.env.DB_URL,
+    //connectionString: process.env.DB_URL,
+    connectionString: process.env.DATABASE_URL
 };
 
 const proConfig = {
@@ -17,7 +18,7 @@ const proConfig = {
 };
 
 const pool = new Pool({
-    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
+    connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
 });
 

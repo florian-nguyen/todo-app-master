@@ -7,6 +7,10 @@ app.use(cors());
 
 const morgan = require("morgan");
 
+const db = require("./db/database");
+console.log("Database_URL", process.env.DATABASE_URL);
+
+
 if (process.env.NODE_ENV === "production") {
     const path = require("path");
     const serveStatic = require('serve-static');
