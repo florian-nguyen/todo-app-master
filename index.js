@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const router = require("./router");
-const { urlencoded } = require("express");
+// const { urlencoded } = require("express");
 app.use(router);
 
 const port = process.env.PORT || 5000;

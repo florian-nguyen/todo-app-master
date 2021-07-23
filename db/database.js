@@ -16,9 +16,10 @@ const proConfig = {
     connectionString: process.env.DATABASE_URL, // defined during deployment
 };
 
-const pool = new Pool(
-    process.env.NODE_ENV === "production" ? proConfig : devConfig
-);
+const pool = new Pool({
+    connectionString: process.env.NODE_ENV === "production" ? proConfig : devConfig,
+    ssl: { rejectUnauthorized: false }
+});
 
 module.exports = {
     query: (text, params, callback) => {
