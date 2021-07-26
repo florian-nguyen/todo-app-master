@@ -4,6 +4,9 @@ const router = express.Router();
 const db = require("./db/database");
 
 const path = require("path");
+const { maxHeaderSize } = require('http');
+
+const maxItemCount = 15;
 
 // Get all todos
 router.get('/api/v1/todo', async (req, res) => {
@@ -18,9 +21,17 @@ router.get('/api/v1/todo', async (req, res) => {
 // Add a new todo
 router.post("/api/v1/todo/add", async (req, res) => {
     try {
-        const newTodo = req.body.name;
-        const response = await db.query("INSERT INTO todo (content, completed) VALUES ($1, 'f') RETURNING *", [newTodo]);
-        res.status(200).json(response.rows[0]);
+        const countResponse = await db.query("SELECT COUNT(*) FROM todo");
+        const count = parseInt(countResponse.rows[0].count);
+
+        if (count < maxItemCount) {
+            const newTodo = req.body.name;
+            const response = await db.query("INSERT INTO todo (content, completed) VALUES ($1, 'f') RETURNING *", [newTodo]);
+            res.status(200).json(response.rows[0]);
+        } else {
+            res.json({ "message": `Error: Cannot add more than ${maxItemCount} items in todo list!` });
+        }
+
     } catch (error) {
         console.error(error);
     }

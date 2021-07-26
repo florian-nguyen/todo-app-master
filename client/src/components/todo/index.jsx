@@ -121,7 +121,31 @@ const AddButton = styled.input`
 `;
 
 const TodoList = styled.div`
+	margin-top: 1rem;
 	width: 100%;
+	height: 98%;
+	overflow-y: scroll;
+
+	/* width */
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: #2f80ed70;
+		border-radius: 3px;
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: #555;
+	}
 `;
 
 const TodoItem = styled(motion.label)`
@@ -129,7 +153,7 @@ const TodoItem = styled(motion.label)`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	margin: 1rem 0;
+	margin: 0.5rem 0;
 	margin-right: auto;
 
 	& span {
@@ -229,6 +253,12 @@ export default function Todo() {
 			const response = await axios.post("/add", {
 				name: newTodo,
 			});
+
+			console.log(response);
+			if (response.data.message) {
+				alert(response.data.message);
+				return;
+			}
 
 			setTodos([...todos, response.data]);
 			setNewTodo("");
